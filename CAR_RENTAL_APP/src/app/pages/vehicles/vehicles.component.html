@@ -1,1 +1,97 @@
-<p>vehicles works!</p>
+<div class="vehicles-container py-4">
+  <div class="container-fluid">
+    <div class="row g-4">
+
+      <!-- Car List (col-8) -->
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-primary text-white fw-bold">
+            <i class="fas fa-car me-2"></i> Car List
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered table-hover align-middle">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Brand</th>
+                  <th>Model</th>
+                  <th>Year</th>
+                  <th>Color</th>
+                  <th>Daily Rate</th>
+                  <th>Reg No</th>
+                  <th>Image</th>
+                  <th class="text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Example row -->
+                <tr>
+                  <td>1</td>
+                  <td>Toyota</td>
+                  <td>Corolla</td>
+                  <td>2022</td>
+                  <td>White</td>
+                  <td>$50</td>
+                  <td>TN12AB1234</td>
+                  <td><img src="https://via.placeholder.com/50" class="img-fluid rounded" alt="Car"></td>
+                  <td class="text-center">
+                    <button class="btn btn-sm btn-warning me-2">
+                      <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="btn btn-sm btn-danger">
+                      <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Car Form (col-4) -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header bg-success text-white fw-bold">
+            <i class="fas fa-plus-circle me-2"></i> Add / Update Car
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="mb-3">
+                <label class="form-label">Brand</label>
+                <input type="text" class="form-control" placeholder="Enter brand" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Model</label>
+                <input type="text" class="form-control" placeholder="Enter model" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Year</label>
+                <input type="number" class="form-control" placeholder="Enter year" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Color</label>
+                <input type="text" class="form-control" placeholder="Enter color" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Daily Rate</label>
+                <input type="number" class="form-control" placeholder="Enter daily rate" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Registration No</label>
+                <input type="text" class="form-control" placeholder="Enter reg no" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Car Image</label>
+                <input type="file" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-success w-100">
+                <i class="fas fa-save me-2"></i> Save Car
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
