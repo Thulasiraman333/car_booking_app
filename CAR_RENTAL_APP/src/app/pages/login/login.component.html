@@ -1,0 +1,38 @@
+<div class="cont">
+  <div class="card login-card">
+    <div class="login-header">
+      <i class="fas fa-user-shield me-2"></i> Admin Login
+    </div>
+    <div class="card-body p-4">
+      <form>
+        <!-- Username -->
+        <div class="mb-3 position-relative">
+          <i class="fas fa-user form-icon"></i>
+          <input type="text" class="form-control" placeholder="Username" [(ngModel)]="loginObj.username" name="username"
+            required>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3 position-relative">
+          <i class="fas fa-lock form-icon"></i>
+          <input type="password" class="form-control" placeholder="Password" [(ngModel)]="loginObj.password"
+            name="password" required>
+        </div>
+
+        <!-- Remember & Forgot -->
+        <div class="d-flex justify-content-between mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rememberMe">
+            <label class="form-check-label" for="rememberMe">Remember Me</label>
+          </div>
+          <a href="#" class="text-decoration-none">Forgot Password?</a>
+        </div>
+
+        <!-- Button -->
+        <button type="submit" class="btn btn-login w-100" (click)="onLogin()">
+          <i class="fas fa-sign-in-alt me-2"></i> Login
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
