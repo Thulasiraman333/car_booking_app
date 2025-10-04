@@ -1,4 +1,10 @@
 <div class="vehicles-container py-4">
+  @if(message()){
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message() }}
+    <button type="button" class="btn-close" (click)="message.set(null)"></button>
+  </div>
+  }
   <div class="container-fluid">
     <div class="row g-4">
 
@@ -24,31 +30,35 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- Example row -->
+                @for (car of cars(); track $index) {
                 <tr>
-                  <td>1</td>
-                  <td>Toyota</td>
-                  <td>Corolla</td>
-                  <td>2022</td>
-                  <td>White</td>
-                  <td>$50</td>
-                  <td>TN12AB1234</td>
-                  <td><img src="https://via.placeholder.com/50" class="img-fluid rounded" alt="Car"></td>
+                  <td>{{car.carId}}</td>
+                  <td>{{car.brand}}</td>
+                  <td>{{car.model}}</td>
+                  <td>{{car.year}}</td>
+                  <td>{{car.color}}</td>
+                  <td>{{car.dailyRate}}</td>
+                  <td>{{car.regNo}}</td>
+                  <td>
+                    <img [src]="car.carImage || 'https://via.placeholder.com/60'" alt="Car" class="img-thumbnail"
+                      style="width: 100px; height: 60px; object-fit: cover;">
+                  </td>
+
                   <td class="text-center">
-                    <button class="btn btn-sm btn-warning me-2">
+                    <button class="btn btn-sm btn-warning me-2" (click)="editCar(car)">
                       <i class="fas fa-edit"></i> Edit
                     </button>
-                    <button class="btn btn-sm btn-danger">
+                    <button class="btn btn-sm btn-danger" (click)="deleteCar(car.carId)">
                       <i class="fas fa-trash-alt"></i> Delete
                     </button>
                   </td>
                 </tr>
+                }
               </tbody>
             </table>
           </div>
         </div>
       </div>
-
       <!-- Car Form (col-4) -->
       <div class="col-md-4">
         <div class="card">
@@ -59,35 +69,48 @@
             <form>
               <div class="mb-3">
                 <label class="form-label">Brand</label>
-                <input type="text" class="form-control" placeholder="Enter brand" required>
+                <input type="text" [(ngModel)]="newCarObj.brand" name="brand" class="form-control"
+                  placeholder="Enter brand" required>
               </div>
               <div class="mb-3">
                 <label class="form-label">Model</label>
-                <input type="text" class="form-control" placeholder="Enter model" required>
+                <input type="text" [(ngModel)]="newCarObj.model" name="model" class="form-control"
+                  placeholder="Enter model" required>
               </div>
               <div class="mb-3">
                 <label class="form-label">Year</label>
-                <input type="number" class="form-control" placeholder="Enter year" required>
+                <input type="number" [(ngModel)]="newCarObj.year" name="year" class="form-control"
+                  placeholder="Enter year" required>
               </div>
               <div class="mb-3">
                 <label class="form-label">Color</label>
-                <input type="text" class="form-control" placeholder="Enter color" required>
+                <input type="text" [(ngModel)]="newCarObj.color" name="color" class="form-control"
+                  placeholder="Enter color" required>
               </div>
               <div class="mb-3">
                 <label class="form-label">Daily Rate</label>
-                <input type="number" class="form-control" placeholder="Enter daily rate" required>
+                <input type="number" [(ngModel)]="newCarObj.dailyRate" name="dailyRate" class="form-control"
+                  placeholder="Enter daily rate" required>
               </div>
               <div class="mb-3">
                 <label class="form-label">Registration No</label>
-                <input type="text" class="form-control" placeholder="Enter reg no" required>
+                <input type="text" [(ngModel)]="newCarObj.regNo" name="regNo" class="form-control"
+                  placeholder="Enter reg no" required>
               </div>
               <div class="mb-3">
                 <label class="form-label">Car Image</label>
-                <input type="file" class="form-control">
+                <input type="text" [(ngModel)]="newCarObj.carImage" name="carImage" class="form-control">
               </div>
-              <button type="submit" class="btn btn-success w-100">
+
+              @if(newCarObj.carId == 0) {
+              <button type="submit" class="btn btn-success w-100" (click)="saveCar()">
                 <i class="fas fa-save me-2"></i> Save Car
               </button>
+              }@else {
+              <button type="submit" class="btn btn-primary w-100" (click)="updateCar(newCarObj)">
+                <i class="fas fa-edit me-2"></i> Update Car
+              </button>
+              }
             </form>
           </div>
         </div>

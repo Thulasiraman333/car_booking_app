@@ -1,1 +1,142 @@
-<p>bookings works!</p>
+<div class="booking-container py-4">
+  <div class="vehicles-container py-4">
+    @if(message()){
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message() }}
+      <button type="button" class="btn-close" (click)="message.set(null)"></button>
+    </div>
+    }
+    <div class="container-fluid">
+      <div class="row g-4">
+
+        <!-- Booking List (col-8) -->
+        <div class="col-md-8">
+          <div class="card shadow">
+            <div class="card-header bg-warning text-dark fw-bold d-flex justify-content-between align-items-center">
+              <span><i class="fas fa-list me-2"></i> Booking List</span>
+              <button class="btn btn-sm btn-light fw-bold" (click)="refreshBookings()">
+                <i class="fas fa-sync-alt me-1"></i> Refresh
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="row g-3">
+                <!-- Booking Card -->
+                <div class="col-md-4" *ngFor="let booking of bookings()">
+                  <div class="card booking-card h-100">
+                    <div class="card-body">
+                      <h5 class="fw-bold text-primary">
+                        <i class="fas fa-user-circle me-2"></i>{{ booking.customerName }}
+                      </h5>
+                      <p class="mb-1"><i class="fas fa-map-marker-alt me-2 text-danger"></i>{{ booking.customerCity }}
+                      </p>
+                      <p class="mb-1"><i class="fas fa-phone-alt me-2 text-success"></i>{{ booking.mobileNo }}</p>
+                      <p class="mb-1"><i class="fas fa-envelope me-2 text-primary"></i>{{ booking.email }}</p>
+                      <p class="mb-1"><i class="fas fa-car me-2 text-secondary"></i> Car Id: {{ booking.carId }}</p>
+                      <p class="mb-1"><i class="fas fa-calendar-day me-2 text-info"></i>{{ booking.bookingDate |
+                        date:'yyyy-MM-dd' }}</p>
+                      <p class="mb-1"><i class="fas fa-tags me-2 text-warning"></i> Discount: {{ booking.discount }}%
+                      </p>
+                      <p class="fw-bold text-success"><i class="fas fa-money-bill-wave me-2"></i> Total: ${{
+                        booking.totalBillAmount }}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-end gap-2">
+                      <button class="btn btn-sm btn-warning" (click)="editBooking(booking)">
+                        <i class="fas fa-edit">Edit</i>
+                      </button>
+                      <button class="btn btn-sm btn-danger" (click)="deleteBooking(booking.bookingId)">
+                        <i class="fas fa-trash-alt">Delete</i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Booking Card -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Booking Form (col-4) -->
+        <div class="col-md-4">
+          <div class="card shadow">
+            <div class="card-header bg-warning text-dark fw-bold">
+              <i class="fas fa-calendar-check me-2"></i> Add / Update Booking
+            </div>
+            <div class="card-body">
+              <form>
+                <!-- Row 1 -->
+                <div class="row mb-3">
+                  <div class="col">
+                    <label class="form-label">Customer Name</label>
+                    <input type="text" [(ngModel)]="newBooking.customerName" name="customerName" class="form-control"
+                      placeholder="Enter name" required>
+                  </div>
+                  <div class="col">
+                    <label class="form-label">Customer City</label>
+                    <input type="text" [(ngModel)]="newBooking.customerCity" name="customerCity" class="form-control"
+                      placeholder="Enter city" required>
+                  </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="row mb-3">
+                  <div class="col">
+                    <label class="form-label">Mobile No</label>
+                    <input type="text" [(ngModel)]="newBooking.mobileNo" name="mobileNo" class="form-control"
+                      placeholder="Enter mobile" required>
+                  </div>
+                  <div class="col">
+                    <label class="form-label">Email</label>
+                    <input type="email" [(ngModel)]="newBooking.email" name="email" class="form-control"
+                      placeholder="Enter email" required>
+                  </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="row mb-3">
+                  <div class="col">
+                    <label class="form-label">Car ID</label>
+                    <select [(ngModel)]="newBooking.carId" name="carId" class="form-select" required>
+                      <option value="" disabled selected>Select Car ID</option>
+                      <option *ngFor="let car of cars()" [value]="car.carId">{{ car.carId }} - {{ car.brand }} {{
+                        car.model }}</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label class="form-label">Booking Date</label>
+                    <input type="date" [(ngModel)]="newBooking.bookingDate" name="bookingDate" class="form-control"
+                      required>
+                  </div>
+                </div>
+
+                <!-- Row 4 -->
+                <div class="row mb-3">
+                  <div class="col">
+                    <label class="form-label">Discount (%)</label>
+                    <input type="number" [(ngModel)]="newBooking.discount" name="discount" class="form-control"
+                      placeholder="Enter discount">
+                  </div>
+                  <div class="col">
+                    <label class="form-label">Total Bill Amount</label>
+                    <input type="number" [(ngModel)]="newBooking.totalBillAmount" name="totalBillAmount"
+                      class="form-control" placeholder="Enter amount">
+                  </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-warning text-dark fw-bold" (click)="saveBooking()">
+                    <i class="fas fa-save me-2"></i> Save
+                  </button>
+                  <button type="reset" class="btn btn-secondary fw-bold">
+                    <i class="fas fa-undo me-2"></i> Clear
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>

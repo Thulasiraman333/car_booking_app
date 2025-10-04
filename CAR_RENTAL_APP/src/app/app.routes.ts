@@ -27,6 +27,9 @@ export const routes: Routes = [
       },
       {
         path: 'vehicles', component: VehiclesComponent
+      },
+      {
+        path: 'booking', component: BookingsComponent
       }
     ]
   }
